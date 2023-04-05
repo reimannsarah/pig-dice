@@ -18,6 +18,12 @@ function TurnScore(userScore, computerScore) {
 }
 
 function diceRoll() {
-    return Math.floor(Math.random() * 6) + 1
+    const dice = Math.floor(Math.random() * 6) + 1;
+    return diceCheck(dice)
 }
 
+function diceCheck(dice) {
+    if (dice !== 1) {
+        return dice;
+    } else { return false }
+}

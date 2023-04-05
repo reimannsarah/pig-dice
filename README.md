@@ -41,3 +41,12 @@ Test: "It will return a number between 1 and 6"
 Code: diceRoll();
 Expected Output: typeof Number;
 
+Describe: diceCheck()
+
+Test: "It will check if the number is 1 and if so return false"
+Code: diceRoll(1);
+Expected Output: false;
+
+Test: "It will it's not 1, return the number"
+Code: diceRoll(dice);
+Expected Output: typeof Number || false;
