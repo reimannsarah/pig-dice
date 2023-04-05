@@ -50,3 +50,10 @@ Expected Output: false;
 Test: "It will it's not 1, return the number"
 Code: diceRoll(dice);
 Expected Output: typeof Number || false;
+
+Describe: addScore()
+
+Test: "It will create an array of rolls and return the array"
+Code:
+
+Expected Output:

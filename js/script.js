@@ -19,11 +19,21 @@ function TurnScore(userScore, computerScore) {
 
 function diceRoll() {
     const dice = Math.floor(Math.random() * 6) + 1;
-    return diceCheck(dice)
+    return dice;
 }
 
-function diceCheck(dice) {
-    if (dice !== 1) {
-        return dice;
-    } else { return false }
+// function diceCheck(dice) {
+//     if (dice !== 1) {
+//         return dice;
+//     } else { return false }
+// }
+
+function addScore() {
+    let scoreArray = [];
+    let roll = diceRoll()
+    while (roll !== 1) {
+        scoreArray.push(roll);
+        roll = diceRoll();
+    }
+    return scoreArray
 }
