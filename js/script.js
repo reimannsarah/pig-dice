@@ -26,7 +26,7 @@ function TurnScore() {
     this.computerScore = [0];
 }
 
-TurnScore.prototype.addTurnScores = function(){
+TurnScore.prototype.calculateTurnScores = function(){
     let computerSum = this.computerScore.reduce(function(accumulator, currentValue){
         return accumulator + currentValue;
     })
@@ -43,20 +43,10 @@ function diceRoll() {
     return dice;
 }
 
-function countTurns() {
-    if(turnCounter === 2){
-        newTurn.addTurnScores();
-        totalScore.addRound(newTurn);
-        newTurn = new TurnScore();
-        turnCounter = 0;
-    }
-}
-
 function turnFlipper() {
     if (user === 1) {
         user = 2;
     } else { user = 1; }}   
-
 
 function runTurn() {
     let roll = diceRoll()
@@ -79,9 +69,25 @@ function runTurn() {
                 turnFlipper();
             } 
     }
-    return newTurn
+    countTurns();
 }
 
+function countTurns () {
+    newTurn.calculateTurnScores();
+    console.log (newTurn);
+}
+
+// function countTurns(turn) {
+//     if(turnCounter === 2){
+//         turn.calculateTurnScores();
+//         console.log(turn);
+//         totalScore.addRound(turn);
+//         console.log(totalScore);
+//         newTurn = new TurnScore();
+//         console.log(newTurn)
+//         turnCounter = 0;
+//     }
+// }
 
 //UI Logic
 
@@ -93,7 +99,7 @@ function startGame (){
 
 function clickRoll () {
     runTurn();
-    countTurns();
+    // countTurns();
     console.log(turnCounter);
 }
 
