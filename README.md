@@ -51,9 +51,12 @@ Test: "It will it's not 1, return the number"
 Code: diceRoll(dice);
 Expected Output: typeof Number || false;
 
-Describe: addScore()
+Describe: scoreArrayer()
 
-Test: "It will create an array of rolls and return the array"
+Test: "It will add to the empty scoreTracker array every time you call the function until it rolls a 1, then it will clear the array"
+Code: scoreArrayer();
+Expected Output: [4,3,2,4,4,6];
+
+Test: "
 Code:
-
 Expected Output:

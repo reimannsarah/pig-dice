@@ -22,18 +22,28 @@ function diceRoll() {
     return dice;
 }
 
+let scoreTracker = [];
+
+function scoreArray() {
+    let roll = diceRoll();
+    if(roll !== 1){
+        scoreTracker.push(roll);
+    } else { scoreTracker = [] }
+    return scoreTracker;
+}
+
 // function diceCheck(dice) {
 //     if (dice !== 1) {
 //         return dice;
 //     } else { return false }
 // }
 
-function addScore() {
-    let scoreArray = [];
-    let roll = diceRoll()
-    while (roll !== 1) {
-        scoreArray.push(roll);
-        roll = diceRoll();
-    }
-    return scoreArray
-}
+// function addScore() {
+//     let scoreArray = [];
+//     let roll = diceRoll()
+//     while (roll !== 1) {
+//         scoreArray.push(roll);
+//         roll = diceRoll();
+//     }
+//     return scoreArray
+// }
