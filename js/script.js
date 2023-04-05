@@ -17,9 +17,9 @@ TotalScore.prototype.assignRound = function () {
     return this.round;
 };
 
-TotalScore.prototype.addRound = function (score) {
+TotalScore.prototype.addRound = function(score) {
     this.scores[this.assignRound()] = score;
-}
+};
 
 function TurnScore() {
     this.userScore = [0];
@@ -35,8 +35,7 @@ TurnScore.prototype.addTurnScores = function(){
         return accumulator + currentValue;
     })
     this.userScore = userSum; 
-
-}
+};
 
 
 function diceRoll() {
@@ -46,10 +45,10 @@ function diceRoll() {
 
 function countTurns() {
     if(turnCounter === 2){
-        newTurn = new TurnScore();
         newTurn.addTurnScores();
-        totalScore.addRound();
-        return turnCounter = 0;
+        totalScore.addRound(newTurn);
+        newTurn = new TurnScore();
+        turnCounter = 0;
     }
 }
 
