@@ -51,12 +51,14 @@ Test: "It will it's not 1, return the number"
 Code: diceRoll(dice);
 Expected Output: typeof Number || false;
 
-Describe: scoreArrayer()
+Describe: runTurn();
 
-Test: "It will add to the empty scoreTracker array every time you call the function until it rolls a 1, then it will clear the array"
-Code: scoreArrayer();
-Expected Output: [4,3,2,4,4,6];
+Test: "It will push each roll to NewTurn instance for corresponding player and flip turn when 1 is rolled"
+Code: runTurn();
+Expected Output: newTurn = { userScore: [an array], computerScore: [an array] }
 
-Test: "
-Code:
-Expected Output:
+Describe: TurnScore.prototype.addTurnScores():
+
+Test: "it will add together the scores in the score arrays for both the user and the computer"
+Code: newTurn.addTurnScores();
+Expected Output: { userScore: 0, computerScore: 0}

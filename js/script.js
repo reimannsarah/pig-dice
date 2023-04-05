@@ -13,23 +13,29 @@ TotalScore.prototype.addTurnScore = function (score) {
 }
 
 function TurnScore() {
-    this.userScore = [];
-    this.computerScore = [];
+    this.userScore = [0];
+    this.computerScore = [0];
 }
+
+TurnScore.prototype.addTurnScores = function(){
+    let computerSum = this.computerScore.reduce(function(accumulator, currentValue){
+        return accumulator + currentValue;
+    })
+    this.computerScore = computerSum;
+    let userSum = this.userScore.reduce(function(accumulator, currentValue){
+        return accumulator + currentValue;
+    })
+    this.userScore = userSum; 
+
+}
+
 //  Global variables
-let scoreTracker = [];
-let user = 1;
+
+let user = Math.floor(Math.random() * 2) +1;
 
 function diceRoll() {
     const dice = Math.floor(Math.random() * 6) + 1;
     return dice;
-}
-
-function scoreArrayer() {
-    let roll = diceRoll();
-    if (roll !== 1) {
-        scoreTracker.push(roll);
-    } else { scoreTracker = [] }
 }
 
 function turnFlipper() {
@@ -40,29 +46,31 @@ function turnFlipper() {
 
 let newTurn = new TurnScore()
 
+// function takeTurn () {
+//     for (let i = 0; i < 2; i ++) {
+//         runTurn();
+//     }
+// }
+
 function runTurn() {
+    let roll = diceRoll()
     if (user === 1) {
-        scoreArrayer();
-        newTurn.userScore.push(scoreTracker);
-            if (scoreTracker.length === 0) {
+        if (roll !== 1) {
+        newTurn.userScore.push(roll);
+        console.log(newTurn.userScore)
+        } else {
+                newTurn.userScore = [0]
                 turnFlipper()
             }
         } else {
-            scoreArrayer();
-            newTurn.computerScore.push(scoreTracker);
-            if (scoreTracker.length === 0) {
+            if (roll !== 1) {
+                newTurn.computerScore.push(roll);
+                console.log(newTurn.computerScore)
+            } else {
+                newTurn.computerScore = [0]
                 turnFlipper();
             } 
     }
     return newTurn
 }
 
-// function addScore() {
-//     let scoreArray = [];
-//     let roll = diceRoll()
-//     while (roll !== 1) {
-//         scoreArray.push(roll);
-//         roll = diceRoll();
-//     }
-//     return scoreArray
-// }
