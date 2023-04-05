@@ -57,8 +57,13 @@ Test: "It will push each roll to NewTurn instance for corresponding player and f
 Code: runTurn();
 Expected Output: newTurn = { userScore: [an array], computerScore: [an array] }
 
+Test: "It will add 1 to the global variable turnCounter, every time the user/computer rolls a 1"
+Code: runTurn(); until roll = 1
+Expected Out: 1
+
 Describe: TurnScore.prototype.addTurnScores():
 
 Test: "it will add together the scores in the score arrays for both the user and the computer"
 Code: newTurn.addTurnScores();
 Expected Output: { userScore: 0, computerScore: 0}
+

@@ -1,3 +1,9 @@
+//  Global variables
+
+let user = Math.floor(Math.random() * 2) +1;
+let newTurn = new TurnScore()
+let turnCounter = 0;
+
 function TotalScore() {
     this.scores = {};
     this.round = 0;
@@ -8,7 +14,7 @@ TotalScore.prototype.assignRound = function () {
     return this.round;
 };
 
-TotalScore.prototype.addTurnScore = function (score) {
+TotalScore.prototype.addRound = function (score) {
     this.scores[this.assignRound()] = score;
 }
 
@@ -29,10 +35,6 @@ TurnScore.prototype.addTurnScores = function(){
 
 }
 
-//  Global variables
-
-let user = Math.floor(Math.random() * 2) +1;
-
 function diceRoll() {
     const dice = Math.floor(Math.random() * 6) + 1;
     return dice;
@@ -41,16 +43,8 @@ function diceRoll() {
 function turnFlipper() {
     if (user === 1) {
         user = 2;
-    } else { user = 1; }
-}
+    } else { user = 1; }}   
 
-let newTurn = new TurnScore()
-
-// function takeTurn () {
-//     for (let i = 0; i < 2; i ++) {
-//         runTurn();
-//     }
-// }
 
 function runTurn() {
     let roll = diceRoll()
@@ -60,6 +54,8 @@ function runTurn() {
         console.log(newTurn.userScore)
         } else {
                 newTurn.userScore = [0]
+                turnCounter ++;
+                console.log(turnCounter);
                 turnFlipper()
             }
         } else {
@@ -68,9 +64,22 @@ function runTurn() {
                 console.log(newTurn.computerScore)
             } else {
                 newTurn.computerScore = [0]
+                turnCounter ++;
+                console.log(turnCounter);
                 turnFlipper();
             } 
     }
     return newTurn
 }
 
+
+//UI Logic
+
+function clickRoll () {
+    runTurn();
+}
+
+
+window.addEventListener("load", function(){
+    this.document.getElementById("roll").addEventListener("click", clickRoll);
+})
