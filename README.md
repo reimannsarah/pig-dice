@@ -32,5 +32,12 @@ let turnScore = new TurnScore(0, 0);
 totalScore.assignRound();
 totalScore.addTurnScore(turnScore);
 totalScore; 
-Expected Output: { scores: {{ userScore: 0, computerScore: 0 }
-}, round: 1 }
+Expected Output: { scores: 1: { userScore: 0, computerScore: 0 }
+, round: 1 }
+
+Describe: diceRoll()
+
+Test: "It will return a number between 1 and 6"
+Code: diceRoll();
+Expected Output: typeof Number;
+

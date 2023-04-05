@@ -17,3 +17,7 @@ function TurnScore(userScore, computerScore) {
     this.computerScore = computerScore;
 }
 
+function diceRoll() {
+    return Math.floor(Math.random() * 6) + 1
+}
+
