@@ -29,5 +29,8 @@ Test: "It should add the instance of turnScore to the TotalScore object at score
 Code:
 let totalScore =  new TotalScore();
 let turnScore = new TurnScore(0, 0);
-totalScore.addTurnScore();
+totalScore.assignRound();
+totalScore.addTurnScore(turnScore);
 totalScore; 
+Expected Output: { scores: {{ userScore: 0, computerScore: 0 }
+}, round: 1 }

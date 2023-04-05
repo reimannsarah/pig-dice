@@ -8,6 +8,10 @@ TotalScore.prototype.assignRound = function () {
     return this.round;
 };
 
+TotalScore.prototype.addTurnScore = function (score) {
+    this.scores[this.assignRound()] = score;
+}
+
 function TurnScore(userScore, computerScore) {
     this.userScore = userScore;
     this.computerScore = computerScore;
