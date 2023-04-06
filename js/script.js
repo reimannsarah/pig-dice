@@ -1,9 +1,10 @@
 //  Global variables
 
-let user = Math.floor(Math.random() * 2) +1;
+let user = 1;
 let newTurn;
 let turnCounter = 0;
 let totalScore;
+let hold = false;
 
 //Business Logic
 
@@ -22,20 +23,20 @@ TotalScore.prototype.addRound = function(score) {
 };
 
 function TurnScore() {
-    this.userScore = [0];
-    this.computerScore = [0];
+    this.userScore = 0;
+    this.computerScore = 0;
 }
 
-TurnScore.prototype.calculateTurnScores = function(){
-    let computerSum = this.computerScore.reduce(function(accumulator, currentValue){
-        return accumulator + currentValue;
-    })
-    this.computerScore = computerSum;
-    let userSum = this.userScore.reduce(function(accumulator, currentValue){
-        return accumulator + currentValue;
-    })
-    this.userScore = userSum; 
-};
+// TurnScore.prototype.calculateTurnScores = function(){
+//     let computerSum = this.computerScore.reduce(function(accumulator, currentValue){
+//         return accumulator + currentValue;
+//     })
+//     this.computerScore = computerSum;
+//     let userSum = this.userScore.reduce(function(accumulator, currentValue){
+//         return accumulator + currentValue;
+//     })
+//     this.userScore = userSum; 
+// };
 
 
 function diceRoll() {
@@ -48,46 +49,68 @@ function turnFlipper() {
         user = 2;
     } else { user = 1; }}   
 
-function runTurn() {
+function runUserTurn() {
     let roll = diceRoll()
-    if (user === 1) {
-        if (roll !== 1) {
-        newTurn.userScore.push(roll);
-        console.log(newTurn.userScore, "user")
-        } else {
-                newTurn.userScore = [0]
-                turnCounter ++;               
-                turnFlipper()
-            }
-        } else {
+    if (roll !== 1 && hold === false) {
+    newTurn.userScore += roll;
+    console.log(newTurn.userScore, "user")
+    } else if (roll !== 1 && hold === true){
+        turnCounter++;               
+        turnFlipper();
+        holdFlipper();
+
+    } else {
+        newTurn.userScore = 0;
+        turnCounter++;
+        turnFlipper();
+        runComputerTurn();
+
+    }
+    
+}
+
+function runComputerTurn() {
+    if (user ===2){
+    let roll = diceRoll()
+    for (i = 0; i < 2; i++){
+        if(i < 1) {
             if (roll !== 1) {
-                newTurn.computerScore.push(roll);
+                newTurn.computerScore += roll;
                 console.log(newTurn.computerScore, "computer")
-            } else {
-                newTurn.computerScore = [0]
+            } else if(roll === 1){
+                newTurn.computerScore = 0;
                 turnCounter ++;            
                 turnFlipper();
-            } 
+            }
+        }else if (i === 1) {
+            turnCounter++;
+            turnFlipper();
+        }
     }
-    countTurns();
+    }
 }
 
-function countTurns () {
-    newTurn.calculateTurnScores();
-    console.log (newTurn);
+function holdFlipper() {
+    if (hold === true) {
+        hold = false;
+    }
 }
 
-// function countTurns(turn) {
-//     if(turnCounter === 2){
-//         turn.calculateTurnScores();
-//         console.log(turn);
-//         totalScore.addRound(turn);
-//         console.log(totalScore);
-//         newTurn = new TurnScore();
-//         console.log(newTurn)
-//         turnCounter = 0;
-//     }
-// }
+function holdButton() {
+    if (hold === false) {
+        hold = true;
+    }
+    runComputerTurn();
+}
+
+
+
+function countTurns() {
+    totalScore.addRound(newTurn);
+    console.log(totalScore);
+    newTurn = new TurnScore();
+    turnCounter = 0;
+}
 
 //UI Logic
 
@@ -98,13 +121,14 @@ function startGame (){
 }
 
 function clickRoll () {
-    runTurn();
-    // countTurns();
-    console.log(turnCounter);
+    runUserTurn();
+    if (turnCounter === 2){
+    countTurns();
+    } 
 }
-
 
 window.addEventListener("load", function(){
     this.document.getElementById("start-game").addEventListener("click", startGame);
     this.document.getElementById("roll").addEventListener("click", clickRoll);
+    this.document.getElementById("hold").addEventListener("click", holdButton);
 })
