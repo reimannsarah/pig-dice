@@ -27,23 +27,12 @@ function TurnScore() {
     this.computerScore = 0;
 }
 
-// TurnScore.prototype.calculateTurnScores = function(){
-//     let computerSum = this.computerScore.reduce(function(accumulator, currentValue){
-//         return accumulator + currentValue;
-//     })
-//     this.computerScore = computerSum;
-//     let userSum = this.userScore.reduce(function(accumulator, currentValue){
-//         return accumulator + currentValue;
-//     })
-//     this.userScore = userSum; 
-// };
-
-
 function diceRoll() {
     const dice = Math.floor(Math.random() * 6) + 1;
     return dice;
 }
 
+//We might not need this, but we might need this. 
 function turnFlipper() {
     if (user === 1) {
         user = 2;
@@ -51,59 +40,43 @@ function turnFlipper() {
 
 function runUserTurn() {
     let roll = diceRoll()
-    if (roll !== 1 && hold === false) {
+    if (roll !== 1) {
     newTurn.userScore += roll;
     console.log(newTurn.userScore, "user")
-    } else if (roll !== 1 && hold === true){
-        turnCounter++;               
-        turnFlipper();
-        holdFlipper();
+    console.log("user rolls:" + " " + roll);
 
     } else {
         newTurn.userScore = 0;
-        turnCounter++;
-        turnFlipper();
-        runComputerTurn();
-        console.log(turnCounter + "turns")
+        console.log(newTurn.userScore, "user")
+        console.log("user rolls:" + " " + roll);        
+        holdButton()       
     }
     
 }
 
 function runComputerTurn() {
-    if (user === 2) {
     let roll = diceRoll()
-    for (i = 0; i < 2; i++){
-        if(i < 1) {
-            if (roll !== 1) {
-                newTurn.computerScore += roll;
-                console.log(newTurn.computerScore, "computer")
-                console.log("loop1!")
-            } else if(roll === 1){
-                newTurn.computerScore = 0;
-                turnCounter ++;            
-                turnFlipper();
-                console.log("loop2!")
-            }
-        }else if (i === 1) {
-            turnCounter++;
-            turnFlipper();
-            console.log("llop3!")
-        }
-    } console.log("looped")
-    }
-}
-
-function holdFlipper() {
-    if (hold === true) {
-        hold = false;
+    if (roll !== 1) {
+        newTurn.computerScore += roll;
+        console.log(newTurn.computerScore, "computer")       
+        console.log("computer rolls:" + " " + roll);
+        turnCounter++;
+    } else {
+        newTurn.computerScore = 0;
+        console.log(newTurn.computerScore, "computer")
+        console.log("computer rolls:" + " " + roll);        
+        turnCounter ++;                    
     }
 }
 
 function holdButton() {
-    if (hold === false) {
-        hold = true;
+    turnCounter++;
+    while (turnCounter < 2) {
+        runComputerTurn();
     }
-    runComputerTurn();
+    if (turnCounter === 2){
+        countTurns();
+    }  
 }
 
 
@@ -125,9 +98,6 @@ function startGame (){
 
 function clickRoll () {
     runUserTurn();
-    if (turnCounter === 2){
-    countTurns();
-    } 
 }
 
 window.addEventListener("load", function(){
