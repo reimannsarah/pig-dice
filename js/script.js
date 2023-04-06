@@ -1,6 +1,6 @@
 //  Global variables
 
-let user = 1;
+let user = 2;
 let newTurn;
 let turnCounter = 0;
 let totalScore;
@@ -64,29 +64,32 @@ function runUserTurn() {
         turnCounter++;
         turnFlipper();
         runComputerTurn();
-
+        console.log(turnCounter + "turns")
     }
     
 }
 
 function runComputerTurn() {
-    if (user ===2){
+    if (user === 2) {
     let roll = diceRoll()
     for (i = 0; i < 2; i++){
         if(i < 1) {
             if (roll !== 1) {
                 newTurn.computerScore += roll;
                 console.log(newTurn.computerScore, "computer")
+                console.log("loop1!")
             } else if(roll === 1){
                 newTurn.computerScore = 0;
                 turnCounter ++;            
                 turnFlipper();
+                console.log("loop2!")
             }
         }else if (i === 1) {
             turnCounter++;
             turnFlipper();
+            console.log("llop3!")
         }
-    }
+    } console.log("looped")
     }
 }
 
