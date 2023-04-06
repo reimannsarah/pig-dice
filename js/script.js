@@ -39,7 +39,8 @@ function turnFlipper() {
     } else { user = 1; }}   
 
 function runUserTurn() {
-    let roll = diceRoll()
+    let roll = diceRoll();
+    displayDice(roll);
     if (roll !== 1) {
     newTurn.userScore += roll;
     console.log(newTurn.userScore, "user")
@@ -51,11 +52,12 @@ function runUserTurn() {
         console.log("user rolls:" + " " + roll);        
         holdButton()       
     }
-    
+
 }
 
 function runComputerTurn() {
     let roll = diceRoll()
+    displayDice(roll);
     if (roll !== 1) {
         newTurn.computerScore += roll;
         console.log(newTurn.computerScore, "computer")       
@@ -67,12 +69,15 @@ function runComputerTurn() {
         console.log("computer rolls:" + " " + roll);        
         turnCounter ++;                    
     }
+
 }
 
 function holdButton() {
+
     turnCounter++;
     while (turnCounter < 2) {
         runComputerTurn();
+        displayComputerScore();
     }
     if (turnCounter === 2){
         countTurns();
@@ -90,18 +95,32 @@ function countTurns() {
 
 //UI Logic
 
-function startGame (){
+function startGame() {
     totalScore = new TotalScore();
     newTurn = new TurnScore()
     console.log(totalScore);
 }
 
-function clickRoll () {
+function clickRoll() {
     runUserTurn();
+    displayUserScore();
+}
+
+function displayUserScore() {
+    document.getElementById("bucky-score").innerText = newTurn.userScore;
+}
+
+function displayComputerScore() {
+    document.getElementById("berli-score").innerText = newTurn.computerScore;
+}
+
+function displayDice(roll) {
+    document.getElementById("dice").innerText =  roll;
 }
 
 window.addEventListener("load", function(){
     this.document.getElementById("start-game").addEventListener("click", startGame);
     this.document.getElementById("roll").addEventListener("click", clickRoll);
     this.document.getElementById("hold").addEventListener("click", holdButton);
+    
 })
