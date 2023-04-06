@@ -91,6 +91,7 @@ function countTurns() {
     console.log(totalScore);
     newTurn = new TurnScore();
     turnCounter = 0;
+    displayRound();
 }
 
 //UI Logic
@@ -116,6 +117,20 @@ function displayComputerScore() {
 
 function displayDice(roll) {
     document.getElementById("dice").innerText =  roll;
+}
+
+function displayRound() {
+    let roundContainer = document.getElementById("round-container");
+    let roundDisplay = document.createElement("div");
+    let buckyP = document.createElement("p");
+    let berliP = document.createElement("p");
+    let keys = Object.keys(totalScore.scores);
+    let round = keys.pop();
+    roundDisplay.innerText = "Round: " + totalScore.round;
+    buckyP.innerText = "Bucky: " + totalScore.scores[round].userScore;
+    berliP.innerText = "Berli: " + totalScore.scores[round].computerScore;
+    roundContainer.append(roundDisplay,buckyP,berliP);
+
 }
 
 window.addEventListener("load", function(){
