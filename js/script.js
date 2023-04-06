@@ -130,12 +130,16 @@ function displayRound() {
     buckyP.innerText = "Bucky: " + totalScore.scores[round].userScore;
     berliP.innerText = "Berli: " + totalScore.scores[round].computerScore;
     roundContainer.append(roundDisplay,buckyP,berliP);
+}
 
+function displayReset() {
+    location.reload();
 }
 
 window.addEventListener("load", function(){
     this.document.getElementById("start-game").addEventListener("click", startGame);
     this.document.getElementById("roll").addEventListener("click", clickRoll);
     this.document.getElementById("hold").addEventListener("click", holdButton);
+    this.document.getElementById("new-game").addEventListener("click", displayReset)
     
 })
