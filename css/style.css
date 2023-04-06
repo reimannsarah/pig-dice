@@ -1,5 +1,30 @@
 .container {
     display: flex;
     justify-content: space-between;
-    
+}
+
+.hidden {
+    display: none;
+}
+
+#popup {
+    z-index: 5;
+    position: fixed;
+    top: 0;
+    background-color: cadetblue;
+    opacity: 90%;
+    width: 100vw;
+    height: 100vh;
+}
+
+#winner {
+    z-index: 6;
+    color: black;
+    margin-top: 50%;
+    margin-left: 50%;
+    font-size: 150px;
+}
+
+#popup .new-game {
+    margin-left: 50%;
 }

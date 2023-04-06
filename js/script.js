@@ -5,6 +5,8 @@ let newTurn;
 let turnCounter = 0;
 let totalScore;
 let hold = false;
+let runningUserScore = 0;
+let runningComputerScore = 0;
 
 //Business Logic
 
@@ -30,50 +32,33 @@ function TurnScore() {
 function diceRoll() {
     const dice = Math.floor(Math.random() * 6) + 1;
     return dice;
-}
-
-//We might not need this, but we might need this. 
-function turnFlipper() {
-    if (user === 1) {
-        user = 2;
-    } else { user = 1; }}   
+} 
 
 function runUserTurn() {
     let roll = diceRoll();
     displayDice(roll);
+
     if (roll !== 1) {
     newTurn.userScore += roll;
-    console.log(newTurn.userScore, "user")
-    console.log("user rolls:" + " " + roll);
-
     } else {
-        newTurn.userScore = 0;
-        console.log(newTurn.userScore, "user")
-        console.log("user rolls:" + " " + roll);        
+        newTurn.userScore = 0;    
         holdButton()       
     }
-
 }
 
 function runComputerTurn() {
-    let roll = diceRoll()
+    let roll = diceRoll();
     displayDice(roll);
     if (roll !== 1) {
         newTurn.computerScore += roll;
-        console.log(newTurn.computerScore, "computer")       
-        console.log("computer rolls:" + " " + roll);
         turnCounter++;
     } else {
-        newTurn.computerScore = 0;
-        console.log(newTurn.computerScore, "computer")
-        console.log("computer rolls:" + " " + roll);        
+        newTurn.computerScore = 0;       
         turnCounter ++;                    
     }
-
 }
 
 function holdButton() {
-
     turnCounter++;
     while (turnCounter < 2) {
         runComputerTurn();
@@ -81,17 +66,29 @@ function holdButton() {
     }
     if (turnCounter === 2){
         countTurns();
+        popup();
     }  
+    
 }
 
-
-
 function countTurns() {
+    runningUserScore += newTurn.userScore;
+    runningComputerScore += newTurn.computerScore;
     totalScore.addRound(newTurn);
     console.log(totalScore);
     newTurn = new TurnScore();
     turnCounter = 0;
     displayRound();
+    console.log("running comp score " + runningComputerScore)
+    console.log("running user score " + runningUserScore)
+}
+
+function win() {
+    if (runningUserScore >= 20) {
+        return "userWin";
+    } else if (runningComputerScore >= 20) {
+        return "computerWin";
+    }
 }
 
 //UI Logic
@@ -105,6 +102,7 @@ function startGame() {
 function clickRoll() {
     runUserTurn();
     displayUserScore();
+    popup();
 }
 
 function displayUserScore() {
@@ -133,13 +131,27 @@ function displayRound() {
 }
 
 function displayReset() {
+    document.getElementById("popup").setAttribute("class", "hidden");
     location.reload();
+}
+
+function popup() {
+    let overlay = document.getElementById("popup");
+    let winnerPopup = document.getElementById("winner");
+    let winCheck = win();
+    if (winCheck === "userWin") {
+        winnerPopup.innerText = "You WON DUmmy";
+        overlay.removeAttribute("class");
+    } else if (winCheck === "computerWin") {
+        winnerPopup.innerText = "dumb. You lost. dumb. pffff.";
+        overlay.removeAttribute("class");
+    }
 }
 
 window.addEventListener("load", function(){
     this.document.getElementById("start-game").addEventListener("click", startGame);
     this.document.getElementById("roll").addEventListener("click", clickRoll);
     this.document.getElementById("hold").addEventListener("click", holdButton);
-    this.document.getElementById("new-game").addEventListener("click", displayReset)
+    this.document.querySelector(".new-game").addEventListener("click", displayReset)
     
 })
