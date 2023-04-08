@@ -52,7 +52,6 @@ function runUserTurn() {
 
 function runComputerTurn() {
     let roll = diceRoll();
-    
     switch (roll) {
         case 2:
             newTurn.computerScore += roll;
