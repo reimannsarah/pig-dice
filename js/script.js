@@ -94,9 +94,10 @@ function win() {
 //UI Logic
 
 function startGame() {
+    document.getElementById("container").removeAttribute("class");
+    document.getElementById("start-game").setAttribute("class", "hidden");
     totalScore = new TotalScore();
-    newTurn = new TurnScore()
-    console.log(totalScore);
+    newTurn = new TurnScore();
 }
 
 function clickRoll() {
@@ -152,6 +153,6 @@ window.addEventListener("load", function(){
     this.document.getElementById("start-game").addEventListener("click", startGame);
     this.document.getElementById("roll").addEventListener("click", clickRoll);
     this.document.getElementById("hold").addEventListener("click", holdButton);
-    this.document.querySelector(".new-game").addEventListener("click", displayReset)
+    this.document.querySelector(".new-game").addEventListener("click", displayReset);
     
-})
+});
