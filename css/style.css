@@ -1,14 +1,54 @@
+@import url('https://fonts.googleapis.com/css2?family=Beth+Ellen&family=Fruktur&family=Josefin+Sans:ital,wght@0,300;0,700;1,300&family=Montserrat:ital,wght@0,400;0,700;1,200&family=Oi&family=PT+Mono&family=Righteous&family=Sedgwick+Ave+Display&family=Unbounded:wght@300;800&display=swap');
 
+:root {
+    --primary-color1: #4d7c0f;
+    --primary-color2: #1d4ed8;
+    --secondary-color1: #f97316;
+    --sec-bgc: #f9731690;
+    --secondary-color2: #fecaca;
+    --shadow: #a3a3a3;
+    --main-font: "Unbounded", Helvetica, sans-serif
+}
 .hidden {
     display: none;
 }
 
+/* HEADING  */
 
 header {
     display: flex;
     flex-direction: column;
     align-items: center;
+    font-family: Beth Ellen;
+    font-size: 2em;
+    color: var(--secondary-color1);
 }
+
+header #cat-head {
+    font-family: Oi;
+    text-transform: uppercase;
+    color: var(--primary-color1);
+}
+
+#start-game {
+    border-style: none;
+    background-color: var(--secondary-color2);
+    color: var(--primary-color2);
+    text-transform: lowercase;
+    font-family: var(--main-font);
+    font-size: 1em;
+    padding: 8px;
+    border-radius: 2px;
+}
+
+#start-game:hover {
+    background-color: var(--primary-color2);
+    color: var(--secondary-color2);
+    transition: 0.2s;
+    text-transform: uppercase;
+}
+
+/* Game Win Pop-up */
 
 #popup {
     z-index: 5;
@@ -32,10 +72,45 @@ header {
     margin-left: 50%;
 }
 
+/* Main game area */
+
 .game-container {
     display: flex;
     justify-content: space-around;
 
     width: 75%;
     margin: auto;
+}
+
+#bucky,
+#berli {
+    background-color: var(--sec-bgc);
+    width: 30%;
+    padding: 1em;
+    height: 50vh;
+    font-family: var(--main-font);
+    border-radius: 2px;
+    box-shadow: 2px 2px 5px var(--shadow);
+}
+
+#bucky h2,
+#berli h2 {
+    color: var(--primary-color2);
+    text-transform: uppercase;
+    border-bottom: 2px solid var(--secondary-color1);
+}
+
+#berli {
+    background-color: var(--secondary-color2);
+}
+
+#berli h2 {
+    color: var(--primary-color1);
+}
+
+#game-play {
+    background-color: var(--primary-color1);
+    width: 30%;
+    display: flex;
+    flex-direction: column;
 }

@@ -1,3 +1,7 @@
+# Bucky-Berli Dice
+
+#### _By Emma Gerigscott, Sarah Reimann, and Raed Alkhanbashi_
+
 # TDD
 
 Describe: TotalScore()
