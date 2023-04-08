@@ -1,3 +1,7 @@
+# Skinny Pig Fat Cat
+
+#### _By Emma Gerigscott, Sarah Reimann, and Raed Alkhanbashi_
+
 # TDD
 
 Describe: TotalScore()

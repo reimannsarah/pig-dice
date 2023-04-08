@@ -8,30 +8,39 @@
     <title>Pig Dice</title>
 </head>
 <body>
-    <h1>Skinny Pig Fat Cat</h1>
 
-    <div class="container">
-        <div id="bucky">
-            <h2>Bucky</h2>
-            <div>Score: <span id="bucky-score"></span></div>
-        </div>
-        <div id="game-play">
-            <button id="roll">Roll</button>
-            <div id="dice"></div>
-            <button id="hold">Hold</button>
-            <div id="round-container"></div>
-        </div>
-        <div id="berli">
-            <h2>Berli</h2>
-            <div>Score: <span id="berli-score"></span></div>
+    <header>
+        <h1>Skinny Pig <span id="cat-head">Fat Cat</span></h1>
+        <button id="start-game">Start Game</button>
+    </header>
+
+    <div id="container" class="hidden">
+        <div class="game-container">
+            <div id="bucky">
+                <h2>Bucky</h2>
+                <div>Score: <span id="bucky-score"></span></div>
+                <div>Total: <span id="bucky-total"></span></div>
+            </div>
+
+            <div id="game-play">
+                <button id="roll">Roll</button>
+                <div id="dice"></div>
+                <button id="hold">Hold</button>
+                <div id="round-container"></div>
+            </div>
+
+            <div id="berli">
+                <h2>Berli</h2>
+                <div>Score: <span id="berli-score"></span></div>
+                <div>Total: <span id="berli-total"></span></div>
+            </div>
         </div>
     </div>
+
     <div id="popup" class="hidden">
         <div id="winner"></div>
         <button class="new-game">New Game</button>
     </div>
-    <button id="start-game">Start Game</button>
-    <button class="new-game">New Game</button>
 
 </body>
 </html>
