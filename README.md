@@ -1,4 +1,4 @@
-# Bucky-Berli Dice
+# Skinny Pig Fat Cat
 
 #### _By Emma Gerigscott, Sarah Reimann, and Raed Alkhanbashi_
 

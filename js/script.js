@@ -1,3 +1,5 @@
+
+
 //  Global variables
 
 let user = 2;
@@ -7,6 +9,8 @@ let totalScore;
 let hold = false;
 let runningUserScore = 0;
 let runningComputerScore = 0;
+let timer = 800;
+let winningScore = 100;
 
 //Business Logic
 
@@ -48,13 +52,40 @@ function runUserTurn() {
 
 function runComputerTurn() {
     let roll = diceRoll();
-    displayDice(roll);
-    if (roll !== 1) {
-        newTurn.computerScore += roll;
-        turnCounter++;
-    } else {
-        newTurn.computerScore = 0;       
-        turnCounter ++;                    
+    
+    switch (roll) {
+        case 2:
+            newTurn.computerScore += roll;
+            turnCounter++;
+            setTimeout(displayDice, timer, roll);
+            setTimeout(displayComputerScore, timer);
+            break;
+        case 3:
+            newTurn.computerScore += roll;
+            setTimeout(displayDice, timer, roll);
+            setTimeout(displayComputerScore, timer);
+            break;
+        case 4:
+            newTurn.computerScore += roll;
+            turnCounter++;
+            setTimeout(displayDice, timer, roll);
+            setTimeout(displayComputerScore, timer);
+            break;
+        case 5:
+            newTurn.computerScore += roll;
+            setTimeout(displayDice, timer, roll);
+            setTimeout(displayComputerScore, timer);
+            break;
+        case 6:
+            newTurn.computerScore += roll;
+            setTimeout(displayDice, timer, roll);
+            setTimeout(displayComputerScore, timer);
+            break;
+        default:
+            newTurn.computerScore = 0;
+            turnCounter++;
+            setTimeout(displayDice, timer, roll);
+            setTimeout(displayComputerScore, timer);
     }
 }
 
@@ -62,13 +93,11 @@ function holdButton() {
     turnCounter++;
     while (turnCounter < 2) {
         runComputerTurn();
-        displayComputerScore();
     }
     if (turnCounter === 2){
-        countTurns();
+        setTimeout(countTurns, 700);
         popup();
     }  
-    
 }
 
 function countTurns() {
@@ -79,14 +108,12 @@ function countTurns() {
     newTurn = new TurnScore();
     turnCounter = 0;
     displayRound();
-    console.log("running comp score " + runningComputerScore)
-    console.log("running user score " + runningUserScore)
 }
 
 function win() {
-    if (runningUserScore >= 20) {
+    if (runningUserScore >= winningScore) {
         return "userWin";
-    } else if (runningComputerScore >= 20) {
+    } else if (runningComputerScore >= winningScore) {
         return "computerWin";
     }
 }
@@ -108,10 +135,12 @@ function clickRoll() {
 
 function displayUserScore() {
     document.getElementById("bucky-score").innerText = newTurn.userScore;
+    document.getElementById("bucky-total").innerText = runningUserScore;
 }
 
 function displayComputerScore() {
     document.getElementById("berli-score").innerText = newTurn.computerScore;
+    document.getElementById("berli-total").innerText = runningComputerScore;
 }
 
 function displayDice(roll) {
@@ -121,14 +150,10 @@ function displayDice(roll) {
 function displayRound() {
     let roundContainer = document.getElementById("round-container");
     let roundDisplay = document.createElement("div");
-    let buckyP = document.createElement("p");
-    let berliP = document.createElement("p");
     let keys = Object.keys(totalScore.scores);
     let round = keys.pop();
-    roundDisplay.innerText = "Round: " + totalScore.round;
-    buckyP.innerText = "Bucky: " + totalScore.scores[round].userScore;
-    berliP.innerText = "Berli: " + totalScore.scores[round].computerScore;
-    roundContainer.append(roundDisplay,buckyP,berliP);
+    roundDisplay.innerText = `ROUND ${totalScore.round}: Bucky ${totalScore.scores[round].userScore}, Berli ${totalScore.scores[round].computerScore}`;
+    roundContainer.append(roundDisplay);
 }
 
 function displayReset() {
